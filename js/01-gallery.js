@@ -1,10 +1,6 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-console.log(galleryItems);
-
-//Обираємо наш об'єкт через клас та додаємо в змінну
-
 const gallery = document.querySelector(".gallery");
 
 //Створюємо нову змінну для зберігання всіх об'єктів
@@ -35,17 +31,14 @@ galleryItems.forEach((element) => {
 
 gallery.append(...items);
 
-// Додаємо подію по кліку
+// Додаємо подію по кліку на document
 
 gallery.addEventListener("click", (el) => {
   el.preventDefault();
 
-  if (el.target.tagName.toLowerCase() !== "img") {
+  if (el.target.nodeName !== "IMG") {
     return;
   }
-  // if (el.target.nodeName !== "IMG") {
-  //   return;
-  // }
 
   //додаємо змінну для вибраної картинки
   const imgSelected = el.target.getAttribute("data-source");
