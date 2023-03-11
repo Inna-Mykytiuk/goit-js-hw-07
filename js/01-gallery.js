@@ -4,32 +4,53 @@ import { galleryItems } from "./gallery-items.js";
 const gallery = document.querySelector(".gallery");
 
 //Створюємо нову змінну для зберігання всіх об'єктів
-const items = [];
+// const items = [];
 
-/*Створюємо розмітку за допомогою ф-ї forEach, додаємо класи елементам за допомогою className*/
+// /*Створюємо розмітку за допомогою ф-ї forEach, додаємо класи елементам за допомогою className*/
 
-galleryItems.forEach((element) => {
-  const galleryItem = document.createElement("div");
-  galleryItem.className = "gallery__item";
+////-----v-1---------
 
-  const galleryLink = document.createElement("a");
-  galleryLink.className = "gallery__link";
-  galleryLink.href = element.original;
+// galleryItems.forEach((element) => {
+//   const galleryItem = document.createElement("div");
+//   galleryItem.className = "gallery__item";
 
-  const galleryImage = document.createElement("img");
-  galleryImage.className = "gallery__image";
-  galleryImage.src = element.preview;
-  galleryImage.alt = element.description;
-  galleryImage.setAttribute("data-source", element.original);
+//   const galleryLink = document.createElement("a");
+//   galleryLink.className = "gallery__link";
+//   galleryLink.href = element.original;
 
-  //Додаємо елементи на сторінку через append
-  galleryItem.append(galleryLink);
-  galleryLink.append(galleryImage);
+//   const galleryImage = document.createElement("img");
+//   galleryImage.className = "gallery__image";
+//   galleryImage.src = element.preview;
+//   galleryImage.alt = element.description;
+//   galleryImage.setAttribute("data-source", element.original);
 
-  items.push(galleryItem);
-});
+//   //Додаємо елементи на сторінку через append
+//   galleryItem.append(galleryLink);
+//   galleryLink.append(galleryImage);
 
-gallery.append(...items);
+//   items.push(galleryItem);
+// });
+// gallery.append(...items);
+
+////-----v-2---------
+
+const createMarkup = galleryItems.reduce(
+  (acc, item) =>
+    acc +
+    `<div class="gallery__item">
+  <a class="gallery__link" href="${item.original}">
+    <img
+      class="gallery__image"
+      src="${item.preview}"
+      data-source="${item.original}"
+      alt="${item.description}"
+    />
+  </a>
+</div>`,
+  ""
+);
+
+gallery.insertAdjacentHTML("beforeend", createMarkup);
 
 // Додаємо подію по кліку на document
 
